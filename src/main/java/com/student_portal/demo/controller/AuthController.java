@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
 public class AuthController {
 
@@ -77,5 +79,20 @@ public class AuthController {
         }
 
         return "redirect:/student/dashboard";
+    }
+
+    // PROFILE PAGE
+    @GetMapping("/profile")
+    public String profile(Model model, Principal principal) {
+
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        User user = userRepository.findByEmail(principal.getName());
+
+        model.addAttribute("user", user);
+
+        return "profile";
     }
 }

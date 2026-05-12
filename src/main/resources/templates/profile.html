@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Profile</title>
+</head>
+<body>
+
+<h2>User Profile</h2>
+
+<p>
+  <b>Name:</b>
+  <span th:text="${user.name}"></span>
+</p>
+<p>
+  <b>Email:</b>
+  <span th:text="${user.email}"></span>
+</p>
+<br>
+<a th:href="@{/dashboard}">Dashboard</a>
+<br><br>
+<form th:action="@{/logout}" method="post">
+  <button type="submit">Logout</button>
+</form>
+</body>
+</html>
