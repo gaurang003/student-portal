@@ -7,9 +7,16 @@
 
 <h1>Welcome Student</h1>
 <a th:href="@{/profile}">Profile</a>
+<a th:href="@{/students/list}">Student List</a>
+<a th:href="@{/students/add}">Add Student</a>
+
+<h2>Total Students: <span th:text="${studentCount}"></span></h2>
+
+<h2>Total Courses: <span th:text="${courseCount}"></span></h2>
 <form th:action="@{/logout}" method="post">
     <button type="submit">Logout</button>
 </form>
 
 </body>
 </html>
+

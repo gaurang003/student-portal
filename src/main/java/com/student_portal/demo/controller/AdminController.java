@@ -1,7 +1,10 @@
 package com.student_portal.demo.controller;
 
 import com.student_portal.demo.entity.Student;
+import com.student_portal.demo.repository.CourseRepository;
+import com.student_portal.demo.repository.StudentRepository;
 import com.student_portal.demo.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +15,16 @@ public class AdminController {
 
     private final StudentService studentService;
 
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
     public AdminController(StudentService studentService) {
         this.studentService = studentService;
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-
-        model.addAttribute("students", studentService.getAllStudents());
-        model.addAttribute("student", new Student());
-
-        return "admin/dashboard";
-    }
 
     @PostMapping("/save-student")
     public String saveStudent(@ModelAttribute Student student) {
@@ -56,4 +57,21 @@ public class AdminController {
 
         return "redirect:/admin/dashboard";
     }
+
+    @GetMapping("/admin/dashboard")
+    public String adminDashboard(Model model) {
+
+        model.addAttribute(
+                "studentCount",
+                studentRepository.count()
+        );
+
+        model.addAttribute(
+                "courseCount",
+                courseRepository.count()
+        );
+
+        return "admin/dashboard";
+    }
+
 }

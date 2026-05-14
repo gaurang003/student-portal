@@ -29,4 +29,9 @@ public class Student {
     private Integer marks;
 
     private Integer attendance;
+
+    private String address;
+
+    private String profileImage;
+
 }
